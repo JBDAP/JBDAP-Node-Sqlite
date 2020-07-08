@@ -1,6 +1,6 @@
 {
   "name": "jbdap-sqlite",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The official JBDAP implementation for nodejs work with sqlite.",
   "main": "index.js",
   "scripts": {
@@ -20,17 +20,17 @@
   },
   "dependencies": {
     "ajv": "^6.11.0",
-    "jbdap-global": "^0.1.6",
+    "jbdap-global": "^0.1.7",
     "jbdap-interpreter": "^0.1.2",
-    "knex": "^0.20.9",
+    "knex": "^0.21.1",
     "lodash": "^4.17.15",
-    "sqlite3": "^4.1.1"
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "jest": "^25.1.0",
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "jest": "^26.1.0",
     "js-better-fs": "^1.0.0",
     "readline": "^1.3.0"
   }
