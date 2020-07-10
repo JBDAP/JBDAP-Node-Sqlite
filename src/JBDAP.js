@@ -580,11 +580,6 @@ async function queryCmd(workshop,cmd,isTop,level,parent) {
         let cascadedFields = fields.cascaded
         let valuesFields = fields.values
         let toolingTypes = [
-            // 'count',
-            // 'sum',
-            // 'avg',
-            // 'max',
-            // 'min',
             'first',
             'clone',
             'pick',
@@ -686,11 +681,21 @@ async function queryCmd(workshop,cmd,isTop,level,parent) {
                     let order = parser.parseOrder(cmd.query.order,lang)
                     if (order.length > 0) query = query.orderBy(order)
                     // 3.3、解析 size 和 page
-                    let pas = parser.parseOffsetAndLimit(cmd.query.page,cmd.query.size,lang)
-                    // 取有限记录
-                    if (pas.limit > 0) query = query.limit(pas.limit)
-                    // 有翻页
-                    if (pas.offset > 0) query = query.offset(pas.offset)
+                    if (!_.isUndefined(cmd.query.size)) {
+                        let pas = parser.parseOffsetAndLimit(cmd.query.page,cmd.query.size,lang)
+                        // 取有限记录
+                        if (pas.limit > 0) query = query.limit(pas.limit)
+                        // 有翻页
+                        if (pas.offset > 0) query = query.offset(pas.offset)
+                    }
+                    else {
+                        // 如果是 entity 查询则只取第一条数据即可
+                        if (cmd.type === 'entity') query = query.limit(1)
+                    }
+                }
+                else {
+                    // 如果是 entity 查询则只取第一条数据即可
+                    if (cmd.type === 'entity') query = query.limit(1)
                 }
                 // 4、执行查询
                 // 只用 sql 函数就可以实现的 values 查询

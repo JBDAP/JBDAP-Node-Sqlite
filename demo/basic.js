@@ -16,12 +16,32 @@ let config = {
 
 // JBDAP指令描述
 let json = {
+  // needTrace: true,
   commands: [
     {
-      name: 'allUsers',
-      type: 'list',
-      target: 'User',
-    }
+      name: 'insertSingle',
+      type: 'create',
+      target: 'Category',
+      data: {
+          name: '政治',
+          sequence: 1,
+      },
+    },
+    {
+        name: 'insertMultiple',
+        type: 'create',
+        target: 'Category',
+        data: [
+            {
+                name: '经济',
+                sequence: 2,
+            },
+            {
+                name: '历史',
+                sequence: 3,
+            },
+        ]
+    },
   ]
 }
 
@@ -30,8 +50,10 @@ const db = require('../test/db.js')
 db.resetDB(conn)
   .then(async ()=>{
     console.log('数据库结构初始化成功')
-    await JBDAP.manipulate(conn,require('../test/json/insert').initData,config)
-    console.log('测试数据填充成功')
+    // let cfg = _.cloneDeep(config)
+    // cfg.printSql = false
+    // await JBDAP.manipulate(conn,require('../test/json/insert').initData,cfg)
+    // console.log('测试数据填充成功')
     // 执行查询
     let res = await JBDAP.manipulate(conn,json,config)
     console.log(JSON.stringify(res,null,4))

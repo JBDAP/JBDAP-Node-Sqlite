@@ -9,8 +9,8 @@
 如果您的项目采用了其它数据库，我们也有相应的实现可供使用：
 
 - Mysql 或者 MariaDB
-  - Github 仓库
-  - npm 包
+  - [Github 仓库: JBDAP-Node-Mysql](https://github.com/JBDAP/JBDAP-Node-Mysqk)
+  - [npm 包: jbdap-mysql](https://www.npmjs.com/package/jbdap-mysql)
 
 也欢迎您编写更多其它数据库的 JBDAP 实现贡献给社区。
 
