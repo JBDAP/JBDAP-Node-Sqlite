@@ -30,6 +30,7 @@ test('测试使用 JBDAP 批量填充数据', async () => {
 test('测试使用 JBDAP 添加重复数据', async () => {
     let json = {
         needLogs: true,
+        needTrace: true,
         isTransaction: true,
         commands: [
             {
@@ -45,7 +46,7 @@ test('测试使用 JBDAP 添加重复数据', async () => {
     let res = await JBDAP.manipulate(conn,json,config)
     // console.log(res)
     expect(res.code).toEqual(500)
-    expect(res.message).toContain('SQLITE_CONSTRAINT:')
+    expect(res.message).toContain('[SQLITE_CONSTRAINT]')
 })
 
 test('测试使用 JBDAP 初始化完整数据库', async () => {

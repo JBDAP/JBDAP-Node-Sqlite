@@ -1426,7 +1426,13 @@ async function executeCmd(workshop,cmd,isTop,level,parent) {
     catch (err) {
         // 对 knex 内部返回的错误进行处理
         if (typeof err === 'object' && err.errno && err.originalStack) {
-            err = new Error(`${err.originalStack.replace('Error: ','')}`)
+            // console.log(JSON.stringify(err,null,4))
+            // 将 knex 返回的错误信息包装成 NiceError
+            err = new JS.NiceError(err.originalStack.replace('Error: ',''),{
+                name: err.code,
+                cause: null,
+                info: {},
+            })
         }
         JS.throwError('DBExecError',err,null,[
             ['zh-cn', `操作数据出错`],
